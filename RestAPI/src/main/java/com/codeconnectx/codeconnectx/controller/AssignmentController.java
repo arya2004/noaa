@@ -12,22 +12,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codeconnectx.codeconnectx.model.Assignment;
-import com.codeconnectx.codeconnectx.service.Service1;
+import com.codeconnectx.codeconnectx.service.AssignmentService;
 
 @RestController
+//@RequestMapping("/")
 public class AssignmentController {
     
     @Autowired
-    private Service1 service1;
+    private AssignmentService service1;
 
     @PostMapping("/assignment")
     public ResponseEntity<String> saveAssignment(@RequestBody Assignment assignment) {
+        
+        if(assignment != null){
+            System.out.println(assignment);
+        }
         boolean result = service1.saveAssignment(assignment);
+        // System.out.println("test");
         if(result)
-            return ResponseEntity.ok("User Created Successfully");
+            return ResponseEntity.ok("Assignment Created Successfully");
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }

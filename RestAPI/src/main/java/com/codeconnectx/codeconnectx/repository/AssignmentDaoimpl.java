@@ -6,7 +6,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 import com.codeconnectx.codeconnectx.model.Assignment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AssignmentDaoimpl implements AssignmentDao{
@@ -19,7 +21,10 @@ public class AssignmentDaoimpl implements AssignmentDao{
     @Override
     public boolean saveAssignment(Assignment assignment){
         try{
-            redisTemplate.opsForHash().put(KEY,assignment.getId().toString(),assignment);
+            if(assignment.getAssignmentid() != null){
+                System.out.println("Not NULL");
+            }
+            redisTemplate.opsForHash().put(KEY,assignment.getAssignmentid(),assignment);
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -31,7 +36,13 @@ public class AssignmentDaoimpl implements AssignmentDao{
     public List<Assignment> fetchAllAssignment(){
         List<Assignment> assignments;
         assignments = redisTemplate.opsForHash().values(KEY);
-        return assignments;
+
+    // Convert List<Object> to List<Assignment> using Java streams
+    // assignments = rawAssignments.stream()
+    //         .map(obj -> (Assignment) obj)
+    //         .collect(Collectors.toList());
+
+    return assignments;
     }
 
     @Override

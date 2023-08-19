@@ -4,7 +4,7 @@ import com.codeconnectx.codeconnectx.model.Assignment;
 
 import java.util.List;
 
-public interface Service1 {
+public interface AssignmentService {
     boolean saveAssignment(Assignment assignment);
 
     List<Assignment> fetchAllAssignment();
