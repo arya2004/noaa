@@ -23,7 +23,7 @@ const problemSchema = new mongoose.Schema({
   problemCode: String,
   difficulty: String,
   tags: String,
-  // ... other fields
+  
 });
 const Problem = mongoose.model('Problem', problemSchema);
 
