@@ -25,13 +25,13 @@ public class AssignmentController {
     @Autowired
     private AssignmentService service1;
 
-    @PostMapping("/assignment")
-    public ResponseEntity<String> saveAssignment(@RequestBody Assignment assignment) {
+    @PostMapping("/classroom/{classroomid}/assignment")
+    public ResponseEntity<String> saveAssignment(@RequestBody Assignment assignment,@PathVariable("classroomid") String classroomid) {
         
         if(assignment != null){
             System.out.println(assignment);
         }
-        boolean result = service1.saveAssignment(assignment);
+        boolean result = service1.saveAssignment(assignment,classroomid);
         // System.out.println("test");
         if(result)
             return ResponseEntity.ok("Assignment Created Successfully");
@@ -39,32 +39,32 @@ public class AssignmentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @GetMapping("/assignment")
-    public ResponseEntity<List<Assignment>> fetchAllAssignment() {
-        List<Assignment> assignments;
-        assignments = service1.fetchAllAssignment();
+    @GetMapping("/classroom/{classroomid}/assignment")
+    public ResponseEntity<List<Object>> fetchAllAssignment(@PathVariable("classroomid") String classroomid) {
+        List<Object> assignments;
+        assignments = service1.fetchAllAssignment(classroomid);
         return ResponseEntity.ok(assignments);
     }
 
-    @GetMapping("/assignment/{id}")
-    public ResponseEntity<Assignment> fetchAssignmentById(@PathVariable("id") Long id) {
-        Assignment assignment;
-        assignment = service1.fetchAssignmentById(id);
+    @GetMapping("/classroom/{classroomid}/assignment/{id}")
+    public ResponseEntity<Object> fetchAssignmentById(@PathVariable("id") Long id,@PathVariable("classroomid") String classroomid) {
+        Object assignment;
+        assignment = service1.fetchAssignmentById(id,classroomid);
         return ResponseEntity.ok(assignment);
     }
 
-    @DeleteMapping("/assignment/{id}")
-    public ResponseEntity<String> deleteAssignment(@PathVariable("id") Long id) {
-        boolean result = service1.deleteAssignment(id);
+    @DeleteMapping("/classroom/{classroomid}/assignment/{id}")
+    public ResponseEntity<String> deleteAssignment(@PathVariable("id") Long id,@PathVariable("classroomid") String classroomid) {
+        boolean result = service1.deleteAssignment(id,classroomid);
         if(result)
             return ResponseEntity.ok("User deleted Successfully!!");
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @PutMapping("/assignment/{id}")
-    public ResponseEntity<String> updateAssignment(@PathVariable("id") Long id, @RequestBody Assignment assignment) {
-        boolean result = service1.updateAssignment(id,assignment);
+    @PutMapping("/classroom/{classroomid}/assignment/{id}")
+    public ResponseEntity<String> updateAssignment(@PathVariable("classroomid") String classroomid,@PathVariable("id") Long id, @RequestBody Assignment assignment) {
+        boolean result = service1.updateAssignment(id,assignment,classroomid);
         if(result)
             return ResponseEntity.ok("User Updated Successfully!!");
         else
