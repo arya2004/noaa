@@ -1,6 +1,7 @@
 export const environment = {
-    production: false,
-    AuthAPIUrl: 'https://localhost:5001/api/',
-    SubmissionAPIUrl: 'https://localhost:5001/api/',
-    ClassroomAPIUrl: 'https://localhost:8051/api/',
-  };
+    authApiUrl: 'https://localhost:7001/api/AuthenticationAPI/',
+    assesmentApiUrl: 'https://localhost:7000/api/Assesment/',
+    submissionApiUrl: 'https://localhost:7003/api/'
+
+
+};
