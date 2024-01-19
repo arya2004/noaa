@@ -1,7 +1,5 @@
 # NOAA
-EDAI-3 Repo
 
-# NOAA
 EDAI-3 Main Project Repoistory
 
 CodeConnectX is a dynamic online space where teachers can assign coding assignments to students fostering hands-on learning and a better skill development approach.
